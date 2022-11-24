@@ -25,7 +25,7 @@ def read_exercise_data(start_date, end_date, exercise_type=None):
     hr_is_measured_list = []
 
     hr_max_list = []
-    hr_min_list = []
+    hr_rest_list = []
     hr_avg_list = []
 
     date_time_list = []
@@ -35,7 +35,7 @@ def read_exercise_data(start_date, end_date, exercise_type=None):
     vo2_max_list = []
     aerobic_threshold_list = []
     anaerobic_threshold_list = []
-    resting_hr_list = []
+    # resting_hr_list = []
 
 
     for file_name in files:
@@ -85,14 +85,13 @@ def read_exercise_data(start_date, end_date, exercise_type=None):
                 hr_sample_times_list.append(t)
                 hr_is_measured_list.append(is_measured)
 
-                hr_max_list.append(np.max(hr))
-                hr_min_list.append(np.min(hr))
+                hr_max_list.append(data_dict[constants.PHYSICAL_INFORMATION_SNAPSHOT][constants.MAX_HEART_RATE])
+                hr_rest_list.append(data_dict[constants.PHYSICAL_INFORMATION_SNAPSHOT][constants.RESTING_HEART_RATE])
                 hr_avg_list.append(np.mean(hr))
 
                 exercise_types_list.append(ex_type)
                 exercise_durations_list.append(duration.total_seconds())
 
-                resting_hr_list.append(data_dict[constants.PHYSICAL_INFORMATION_SNAPSHOT][constants.RESTING_HEART_RATE])
                 aerobic_threshold_list.append(
                     data_dict[constants.PHYSICAL_INFORMATION_SNAPSHOT][constants.AEROBIC_THRESHOLD])
                 anaerobic_threshold_list.append(
@@ -107,14 +106,14 @@ def read_exercise_data(start_date, end_date, exercise_type=None):
                 constants.HR_SAMPLING_TIMES: hr_sample_times_list,
                 constants.HR_IS_MEASURED: hr_is_measured_list,
                 constants.HR_MAX: np.array(hr_max_list),
-                constants.HR_MIN: np.array(hr_min_list),
+                constants.HR_REST: np.array(hr_rest_list),
                 constants.HR_AVG: np.array(hr_avg_list),
                 constants.EXERCISE_TYPE: exercise_types_list,
                 constants.DURATION: exercise_durations_list,
-                constants.RESTING_HEART_RATE: resting_hr_list,
                 constants.AEROBIC_THRESHOLD: aerobic_threshold_list,
                 constants.ANAEROBIC_THRESHOLD: anaerobic_threshold_list,
-                constants.VO2_MAX: vo2_max_list}
+                constants.VO2_MAX: vo2_max_list,
+                constants.SEX: data_dict[constants.PHYSICAL_INFORMATION_SNAPSHOT][constants.SEX]}
 
     return out_dict
 
@@ -128,3 +127,31 @@ def clean_data(df):
     return out_df
 
 
+def x_positions_and_labels_for_datetime(start_datetime, datetime_vector, labels_format):
+
+    x_positions = [(t - start_datetime).total_seconds() / 86400 for t in datetime_vector]
+
+    if labels_format == constants.DATE_TIME:
+        x_labels = [t.strftime('%Y-%m-%d -- %H:%M') for t in datetime_vector]
+    elif labels_format == constants.DATE:
+        x_labels = [t.strftime('%Y-%m-%d') for t in datetime_vector]
+    else:
+        raise Exception('Unknown Labels Format!')
+
+    return x_positions, x_labels
+
+
+def generate_date_vector(start_d, end_d, out_format):
+    number_of_days = (end_d - start_d).days + 1
+
+    if out_format == constants.DATE:
+        days = [start_d + datetime.timedelta(days=d) for d in range(number_of_days)]
+    elif out_format == constants.DATE_TIME:
+        start_date = datetime.datetime.fromisoformat(start_d.isoformat())
+        days = [start_date + datetime.timedelta(days=d) for d in range(number_of_days)]
+    else:
+        raise Exception('Unknown Format!')
+
+
+
+    return days

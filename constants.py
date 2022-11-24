@@ -13,7 +13,7 @@ WANDB_STATIC_VIS: Final = 'static-vis'
 WANDB_TODO_TODO_TABLE: Final = 'todo-todo-table'
 
 ATHLETE: Final = 'athlete'
-GENDER: Final = 'gender'
+SEX: Final = 'sex'
 DATE_TIME: Final = 'date_time'
 DISTANCE: Final = 'distance (m)'
 ELAPSED_TIME: Final = 'elapsed_time (s)'
@@ -22,6 +22,9 @@ AVERAGE_HEART_RATE: Final = 'average_heart_rate (bpm)'
 SLOPE: Final = 'slope'
 SPEED: Final = 'speed (min/km)'  # raw speed
 ADJUSTED_SPEED: Final = 'adjusted_speed'
+
+MALE: Final = 'MALE'
+FEMALE: Final = 'FEMALE'
 
 FUNCTIONAL_TRAINING: Final = 'FUNCTIONAL_TRAINING'
 STRENGTH_TRAINING: Final = 'STRENGTH_TRAINING'
@@ -46,7 +49,7 @@ CAD: Final = 'cad'  # cadence
 HR_SAMPLING_TIMES: Final = 'hr_sampling_times'
 HR_IS_MEASURED: Final = 'hr_is_measured'
 HR_MAX: Final = 'hr_max'
-HR_MIN: Final = 'hr_min'
+HR_REST: Final = 'hr_rest'
 HR_AVG: Final = 'hr_avg'
 
 GREAT_CIRCLE: Final = 'great_circle_distance'

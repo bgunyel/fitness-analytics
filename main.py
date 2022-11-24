@@ -1,17 +1,25 @@
 import datetime
 
+import matplotlib.pyplot as plt
+
 import constants
 import utils
 import stats
+import fitness
 
 
 def development():
+    start_date = '2022-04-01'
+    end_date = '2022-11-30'
 
-    start_date = '2022-09-08'
-    end_date = '2022-12-31'
+    stats.examine_fitness_and_fatigue(start_date=start_date, end_date=end_date)
 
-    stats.examine_exercise_hr(start_date=start_date, end_date=end_date)
 
+
+    dummy = -32
+
+    # stats.examine_vo2max(start_date=start_date, end_date=end_date)
+    # stats.examine_exercise_hr(start_date=start_date, end_date=end_date)
 
 
 def main(params):
