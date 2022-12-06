@@ -3,3 +3,6 @@ out/
 wandb/
 .idea/
 __pycache__/
+
+guru_env.json
+guru_token.json

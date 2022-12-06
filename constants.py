@@ -4,6 +4,8 @@ DATA_FOLDER: Final = './data/'
 OUT_FOLDER: Final = './out/'
 
 POLAR_DATA_FOLDER: Final = DATA_FOLDER + 'polar_bg/'
+GURU_ENV_FILE: Final = './guru_env.json'
+GURU_TOKEN_FILE: Final = './guru_token.json'
 
 WANDB_PROJECT_NAME: Final = 'todo-todo'
 WANDB_USER_NAME: Final = 'bertan-gunyel'

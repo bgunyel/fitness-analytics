@@ -6,13 +6,15 @@ import constants
 import utils
 import stats
 import fitness
+import guru
 
 
 def development():
     start_date = '2022-04-01'
     end_date = '2022-11-30'
 
-    stats.examine_fitness_and_fatigue(start_date=start_date, end_date=end_date)
+    # stats.examine_fitness_and_fatigue(start_date=start_date, end_date=end_date)
+    guru.get_guru()
 
 
 
